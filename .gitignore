@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# PyCharm
+.idea
+
+logs
+springrts_platform_stats/settings_local.py
