@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from rest_framework import serializers
-from data.models import CpuData, GlData, GpuData, MachineData, OsData, PlatformData, ScreenData, SDLData
+from data.models import CpuData, EngineData, GlData, GpuData, MachineData, OsData, PlatformData, ScreenData, SDLData
 from data.serializers import MachineDataSerializer
 from .models import Machine
 from springrts_platform_stats.logging import logger
@@ -70,7 +70,13 @@ class MachineSerializer(serializers.ModelSerializer):
 
         # create objects from classifiable POST data
         old_objs = list()
-        for attr_name, kls in (('gl_data', GlData),  ('gpu_data', GpuData),  ('screen_data', ScreenData), ('sdl_data', SDLData)):
+        for attr_name, kls in (
+                ('engine_data', EngineData),
+                ('gl_data', GlData),
+                ('gpu_data', GpuData),
+                ('screen_data', ScreenData),
+                ('sdl_data', SDLData),
+        ):
             obj = kls.from_api_dict(platform_data)
             if obj:
                 old_obj = getattr(machine, attr_name)

@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from django.contrib import admin
-from .models import CpuData, GlData, GpuData, MachineData, OsData, PlatformData, ScreenData, SDLData
+from .models import CpuData, EngineData, GlData, GpuData, MachineData, OsData, PlatformData, ScreenData, SDLData
 
 
 class CpuDataAdmin(admin.ModelAdmin):
     list_display = ('name', 'id', 'cores')
     search_fields = ['name', 'id', 'cores']
     list_filter = ('name',)
+
+
+class EngineDataAdmin(admin.ModelAdmin):
+    list_display = ('wordSize', 'version', 'versionFull', 'versionPatchSet')
+    search_fields = ['buildFlags', 'version', 'versionFull', 'versionPatchSet', 'wordSize']
+    list_filter = ('wordSize', 'version')
 
 
 class GlDataAdmin(admin.ModelAdmin):
@@ -50,6 +56,7 @@ class SDLDataAdmin(admin.ModelAdmin):
     search_fields = ['sdlVersionCompiledMajor', 'id', 'sdlVersionLinkedMajor']
 
 admin.site.register(CpuData, CpuDataAdmin)
+admin.site.register(EngineData, EngineDataAdmin)
 admin.site.register(GlData, GlDataAdmin)
 admin.site.register(GpuData, GpuDataAdmin)
 admin.site.register(MachineData, MachineDataAdmin)

@@ -51,6 +51,20 @@ class CpuData(FromLuaMixin, models.Model):
         ordering = ('name', 'cores')
 
 
+class EngineData(FromLuaMixin, models.Model):
+    buildFlags      = models.CharField(max_length=1024, blank=True)
+    version         = models.CharField(max_length=64, blank=True)
+    versionFull     = models.CharField(max_length=128, blank=True)
+    versionPatchSet = models.CharField(max_length=32, blank=True)
+    wordSize        = models.PositiveIntegerField(blank=True, null=True)
+
+    def __unicode__(self):
+        return "EngineData({!r}, {!r}, {!r})".format(self.pk, self.version, self.wordSize)
+
+    class Meta:
+        ordering = ('versionFull', 'versionPatchSet')
+
+
 class GlData(FromLuaMixin, models.Model):
     glRenderer                = models.CharField(max_length=256, blank=True)
     glVendor                  = models.CharField(max_length=256, blank=True)
@@ -154,6 +168,7 @@ class MachineData(models.Model):
     cpu           = models.ForeignKey(CpuData)
     os            = models.ForeignKey(OsData)
     ram           = models.PositiveIntegerField(blank=True)
+    engine_data   = models.ForeignKey(EngineData, blank=True, null=True)
     gl_data       = models.ForeignKey(GlData, blank=True, null=True)
     gpu_data      = models.ForeignKey(GpuData, blank=True, null=True)
     screen_data   = models.ForeignKey(ScreenData, blank=True, null=True)
@@ -174,7 +189,7 @@ class MachineData(models.Model):
 
 
 def purge_not_associated():
-    for kls in (CpuData, OsData, GlData, GpuData, ScreenData, SDLData, PlatformData):
+    for kls in (CpuData, EngineData, OsData, GlData, GpuData, ScreenData, SDLData, PlatformData):
         objs = kls.objects.exclude(id__in=MachineData.objects.values_list('platform_data__id', flat=True))
         if objs.exists():
             logger.warn('Deleting: %s', '\n'.join(objs))
