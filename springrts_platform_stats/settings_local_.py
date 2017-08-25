@@ -3,7 +3,10 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 's3cr3t'
 DEBUG = False
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "stats.replays.springrts.com", "replays.springrts.com",
+                 "replays-test.springrts.com", "replays.admin-box.com", "replays-test.admin-box.com",
+                 "78.46.100.156"]
+STATIC_ROOT = '/var/www/.../htdocs/static'
 
 DATABASES = dict(
     default=dict(
