@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from binascii import hexlify
-from hashlib import pbkdf2_hmac
+from passlib.hash import pbkdf2_sha256
 from django.db import models
 from django.conf import settings
 from springrts_platform_stats.logging import logger
@@ -150,7 +149,7 @@ class SDLData(FromLuaMixin, models.Model):
 
 
 class MachineData(models.Model):
-    account       = models.CharField(max_length=64)
+    account       = models.CharField(max_length=128)
     updated       = models.DateTimeField(auto_now=True)
     cpu           = models.ForeignKey(CpuData)
     os            = models.ForeignKey(OsData)
@@ -171,7 +170,7 @@ class MachineData(models.Model):
 
     @staticmethod
     def mkhash(value):
-        return hexlify(pbkdf2_hmac('sha256', bytes(value), settings.ACCOUNT_SALT, 100000))
+        return pbkdf2_sha256.using(salt=settings.ACCOUNT_SALT, rounds=100000).hash(str(value))
 
 
 def purge_not_associated():
