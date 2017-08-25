@@ -46,6 +46,17 @@ Installation
 machine`.
 * To allow users to post to API, add them to that group.
 
+
+Command line example
+====================
+
+.. code-block:: bash
+
+    curl -u username:s3cr3t -X POST -H "Content-Type: application/json" \
+    -d '{"accountId": 12345, "cpuName": "Intel i8", "osFamily": "Windows", "platformData": {"ram": 1024, "glslVersion": "4.50 NVIDIA"}}' \
+    http://stats.replays.springrts.com/machine/
+    # returns a JSON object
+
 Python Client API
 =================
 
