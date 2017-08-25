@@ -46,7 +46,7 @@ class CpuData(FromLuaMixin, models.Model):
     def get_lua_field_names(cls):
         return 'cpuName', 'cpuCores'
 
-class Meta:
+    class Meta:
         unique_together = ('name', 'cores')
         ordering = ('name', 'cores')
 

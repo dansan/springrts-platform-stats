@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('api.urls')),
     url(r'^schema/$', get_schema_view(title='SpringRTS Platform Statistics API')),
-    url(r'^docs/', include_docs_urls(title='My API service')),
+    url(r'^docs/', include_docs_urls(title='SpringRTS Platform Statistics API')),
 ]
