@@ -120,3 +120,58 @@ TL;DR:
     client.action(schema, action, params).then(function(result) {
         // Return value is in 'result'
     })
+
+List of currently detected keys, when POSTing to the API:
+=========================================================
+
+All other keys are stored in a generic key/value pair way, but the following ones have their separate database tables:
+
+
+*Get this from OS/spring engine somehow?* (See BA/Evo gadget):
+
+* cpuName: str
+* cpuCores: str
+
+* resolution_x: int
+* resolution_y: int
+* color_depth: int
+* refresh_rate: int
+* windowed: bool
+
+*Lua Engine table:*
+
+* buildFlags: str
+* version: str
+* versionFull: str
+* versionPatchSet: str
+* wordSize: str
+
+*Lua Platform table:*
+
+* glRenderer: str
+* glVendor: str
+* glVersion: str
+* glVersionShort: str
+* glewVersion: str
+* glslVersion: str
+* glslVersionShort: str
+* glSupportNonPowerOfTwoTex: bool
+* glSupportTextureQueryLOD: bool
+* glSupport24bitDepthBuffer: bool
+* glSupportRestartPrimitive: bool
+* glSupportClipSpaceControl: bool
+* glSupportFragDepthLayout: bool
+* --
+* gpu: str
+* gpuMemorySize: int
+* gpuVendor: str
+* --
+* osFamily: str
+* osName: str
+* --
+* sdlVersionCompiledMajor: int
+* sdlVersionCompiledMinor: int
+* sdlVersionCompiledPatch: int
+* sdlVersionLinkedMajor: int
+* sdlVersionLinkedMinor: int
+* sdlVersionLinkedPatch: int
